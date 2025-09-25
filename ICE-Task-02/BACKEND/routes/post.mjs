@@ -1,5 +1,6 @@
 import express from 'express';
 import db from '../db/conn.mjs';
+import checkAuth from '../check-auth.mjs';
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 // Create a new record.
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, async (req, res) => {
     let newDocument = {
         user: req.body.user,
         content: req.body.content,
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update a record by id.
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', checkAuth, async (req, res) => {
     const query = { _id: new ObjectId(req.params.id) };
     const updateDocument = {
         $set: {
