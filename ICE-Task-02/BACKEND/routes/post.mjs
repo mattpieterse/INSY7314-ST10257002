@@ -8,8 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     let collection = db.collection('posts');
     let results = await collection.find({}).toArray();
-    res.send(results)
-        .status(200);
+    res.status(200).send(results);
 });
 
 // Create a new record.
@@ -22,6 +21,7 @@ router.post('/', async (req, res) => {
 
     let collection = db.collection('posts');
     let result = await collection.insertOne(newDocument);
-    res.send(result)
-        .status(204);
+    res.status(201).send(result);
 });
+
+export default router;
