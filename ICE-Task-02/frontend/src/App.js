@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/navbar';
+import PostList from './components/postList';
+import Login from './components/login';
+import CreatePost from './components/postCreate';
+import EditPost from './components/postEdit';
+import Register from './components/register';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to APDS
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          We are using react for the frontend
-        </a>
-      </header>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<PostList />} />
+        <Route path="/edit/:id" element={<EditPost />} />
+        <Route path="/create" element={<CreatePost />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
